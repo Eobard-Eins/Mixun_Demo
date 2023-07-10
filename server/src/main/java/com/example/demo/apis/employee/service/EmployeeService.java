@@ -41,6 +41,7 @@ public class EmployeeService {
     public Employee updateEmployee(long id, Employee employeeDetails){
         Employee updateEmployee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id" + id));
         updateEmployee.setEmployeeName(employeeDetails.getEmployeeName());
+        updateEmployee.setEmployeeDepartment(employeeDetails.getEmployeeDepartment());
         updateEmployee.setEmployeePhone(employeeDetails.getEmployeePhone());
         updateEmployee.setEmployeePosition(employeeDetails.getEmployeePosition());
 
