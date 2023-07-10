@@ -32,11 +32,10 @@ public class Employee {
 
     @Column(name = "employee_name")//定义该属性对应数据库中的列名
     private  String employeeName;
-    @Column(name="employee_department")
-    private String employeeDepartment;
     @Column(name="employee_phone")
     private String employeePhone;
-
+    @Column(name="employee_department")
+    private String employeeDepartment;
     @Column(name="employee_position")
     private String employeePosition;
 

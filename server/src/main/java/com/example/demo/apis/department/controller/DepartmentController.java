@@ -22,6 +22,9 @@ public class DepartmentController {
 
     @GetMapping
     public  List<Department> getAllDepartments(){return departmentService.getAllDepartment();}
+    @GetMapping("/getAllDepartmentName")
+    public List<String> getAllDepartmentName(){return departmentService.getAllDepartmentName();}
+
     @PostMapping
     public Department createDepartment(@RequestBody Department dep){return departmentService.createDepartment(dep);}
 

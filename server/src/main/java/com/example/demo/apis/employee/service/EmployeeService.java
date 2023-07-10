@@ -1,5 +1,7 @@
 package com.example.demo.apis.employee.service;
 
+import com.example.demo.apis.department.model.Department;
+import com.example.demo.apis.department.repository.DepartmentRepository;
 import com.example.demo.common.ResourceNotFoundException;
 import com.example.demo.apis.employee.model.Employee;
 import com.example.demo.apis.employee.repository.EmployeeRepository;
@@ -7,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     // Build get All employees REST API
     public List<Employee> getAllEmployees(){
@@ -21,8 +26,9 @@ public class EmployeeService {
 
     // Build create employee REST API
     public Employee createEmployee(Employee employee){
-
-        return employeeRepository.save(employee);
+        Employee e=employeeRepository.save(employee);
+        departmentRepository.updateNum((int) employeeRepository.count(),e.getEmployeeDepartment());
+        return e;
     }
 
     // Build get employee by id REST API
@@ -40,6 +46,10 @@ public class EmployeeService {
     // Build update employee REST API
     public Employee updateEmployee(long id, Employee employeeDetails){
         Employee updateEmployee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id" + id));
+        String dep_old=updateEmployee.getEmployeeDepartment();
+        String dep_new=employeeDetails.getEmployeeDepartment();
+
+
         updateEmployee.setEmployeeName(employeeDetails.getEmployeeName());
         updateEmployee.setEmployeeDepartment(employeeDetails.getEmployeeDepartment());
         updateEmployee.setEmployeePhone(employeeDetails.getEmployeePhone());
@@ -52,7 +62,8 @@ public class EmployeeService {
     // Build delete employee REST API
     public void deleteEmployee(long id){
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id" + id));
-
+        String temp=employee.getEmployeeDepartment();
         employeeRepository.delete(employee);
+        departmentRepository.updateNum((int) employeeRepository.count(),temp);
     }
 }

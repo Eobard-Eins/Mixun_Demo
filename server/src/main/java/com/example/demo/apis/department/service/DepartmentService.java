@@ -23,9 +23,6 @@ public class DepartmentService {
     public Department updateDepartment(String departmentName,Department dep){
         Department updateDepartment=departmentRepository.findById(departmentName).orElseThrow(() -> new ResourceNotFoundException("Department not exist with department name: " + departmentName));
         updateDepartment.setDepartmentName(dep.getDepartmentName());
-        updateDepartment.setDepartmentNum(dep.getDepartmentNum());
-        updateDepartment.setDepartmentMangerName(dep.getDepartmentMangerName());
-        updateDepartment.setDepartmentMangerId(dep.getDepartmentMangerId());
         updateDepartment.setDepartmentDescription(dep.getDepartmentDescription());
         departmentRepository.save(updateDepartment);
         return updateDepartment;
