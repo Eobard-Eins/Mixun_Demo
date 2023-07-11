@@ -1,6 +1,7 @@
 package com.example.demo.apis.employee.controller;
 
 
+import com.example.demo.apis.customer.model.Customer;
 import com.example.demo.apis.employee.model.Employee;
 import com.example.demo.apis.employee.repository.EmployeeRepository;
 import com.example.demo.apis.employee.service.EmployeeService;
@@ -28,6 +29,8 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+    @GetMapping("/exists/{dep}")
+    public Boolean existsJL(@PathVariable String dep){return employeeService.existJingLi(dep);}
     // Build create employee REST API
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee){
@@ -53,7 +56,10 @@ public class EmployeeController {
 
         return ResponseEntity.ok(updateEmployee);
     }
-
+    @GetMapping("/findByInfo/")
+    public List<Employee> findEmployeeByInfoLike (@RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("department")String department,@RequestParam("position") String position){
+        return employeeRepository.findEmployeeByEmployeeNameLikeAndEmployeePhoneLikeAndEmployeeDepartmentLikeAndEmployeePosition("%"+name+"%","%"+phone+"%","%"+department+"%","%"+position+"%");
+    }
     // Build delete employee REST API
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id){

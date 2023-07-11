@@ -30,8 +30,8 @@ public class ProductService {
         return res;
     }
     // Build get Product by id REST API
-    public List<Product> getProductByNameOrNum(String NameOrNum){
-        return productRepository.getProductByProductNameOrProductNum(NameOrNum);
+    public List<Product> getProductByName(String NameOrNum){
+        return productRepository.findProductByProductNameLike(NameOrNum);
     }
 
     // Build update Product REST API

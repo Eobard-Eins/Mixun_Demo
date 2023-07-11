@@ -11,8 +11,8 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long>,JpaSpecificationExecutor {
-    @Query(value = "select * from products where product_name = :temp or product_num = :temp",nativeQuery = true)
-    public List<Product> getProductByProductNameOrProductNum(@Param("temp") String nameOrNum);
-//    @Query(value = "select * from employees where = null", )
+
+    public List<Product> findProductByProductNameLike(@Param("temp") String name);
+
 
 }

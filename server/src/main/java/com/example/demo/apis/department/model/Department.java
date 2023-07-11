@@ -12,6 +12,8 @@ import jakarta.persistence.*;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name="department_name")
     private String departmentName;
 
     @Column(name="department_num")
@@ -19,7 +21,7 @@ public class Department {
     @Column(name="department_manger_name")
     private String departmentMangerName;
     @Column(name="department_manger_id")
-    private String departmentMangerId;
+    private long departmentMangerId;
     @Column(name="department_description")
     private String departmentDescription;
 

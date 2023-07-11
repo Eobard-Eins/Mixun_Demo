@@ -1,9 +1,6 @@
 package com.example.demo.apis.department.controller;
-import com.example.demo.apis.customer.model.Customer;
-import com.example.demo.apis.customer.repository.CustomerRepository;
-import com.example.demo.apis.customer.service.CustomerService;
 import com.example.demo.apis.department.model.Department;
-import com.example.demo.apis.department.repository.DepartmentRepository;
+import com.example.demo.apis.department.model.inputDepartment;
 import com.example.demo.apis.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,10 +23,14 @@ public class DepartmentController {
     public List<String> getAllDepartmentName(){return departmentService.getAllDepartmentName();}
 
     @PostMapping
-    public Department createDepartment(@RequestBody Department dep){return departmentService.createDepartment(dep);}
-
+    public Department createDepartment(@RequestBody inputDepartment dep){return departmentService.createDepartment(dep);}
+    @GetMapping("{id}")
+    public ResponseEntity<Department> getDepartmentById(@PathVariable String id){
+        Department Dep = departmentService.getDepartmentById(id);
+        return ResponseEntity.ok(Dep);
+    }
     @PutMapping("{id}")
-    public ResponseEntity<Department> updateDepartment(@PathVariable String id,@RequestBody Department department){
+    public ResponseEntity<Department> updateDepartment(@PathVariable String id,@RequestBody inputDepartment department){
         Department res=departmentService.updateDepartment(id,department);
         return ResponseEntity.ok(res);
     }

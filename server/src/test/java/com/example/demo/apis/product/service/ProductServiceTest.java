@@ -27,7 +27,7 @@ class ProductServiceTest {
 
     @Test
     void getProductByNameOrNum() {
-        List<Product> lp=productRepository.getProductByNameOrNum("23");
+        List<Product> lp=productRepository.getProductByName("23");
         for (Product p:lp) System.out.println(p.getProductName());
     }
 

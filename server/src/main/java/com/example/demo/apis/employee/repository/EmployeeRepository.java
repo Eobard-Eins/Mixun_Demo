@@ -1,5 +1,6 @@
 package com.example.demo.apis.employee.repository;
 
+import com.example.demo.apis.customer.model.Customer;
 import com.example.demo.apis.employee.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -15,4 +16,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>,JpaSpec
     public String getEmployeeNameByEmployeeId(long id);
 //    @Query(value = "select * from employees where = null", )
 
+    public int countByEmployeeDepartment(String name);
+    public List<Employee> findEmployeeByEmployeeNameLikeAndEmployeePhoneLikeAndEmployeeDepartmentLikeAndEmployeePosition(@Param("name") String name , @Param("phone") String phone , @Param("department") String department,@Param("position") String position );
 }

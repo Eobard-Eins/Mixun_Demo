@@ -59,6 +59,11 @@ public class ProductController {
         return ResponseEntity.ok(updateProduct);
     }
 
+    @GetMapping("/findByInfo/")
+    public List<Product> findByProductName(@RequestParam("name") String name){
+        return productService.getProductByName("%"+name+"%");
+    }
+
     // Build delete employee REST API
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id){
